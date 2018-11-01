@@ -64,4 +64,4 @@ RUN apt update && apt install --no-install-recommends --no-install-suggests -y $
     && apt remove --autoremove --purge -y ${REMOVE_DEPS} \
     && rm -rf /var/lib/apt/lists/*
 
-CMD ["python]
+CMD ["python"]

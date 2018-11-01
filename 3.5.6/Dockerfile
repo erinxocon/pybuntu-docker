@@ -15,7 +15,8 @@ ENV BUILD_DEPS build-essential \
     libbz2-dev \
     ca-certificates \
     zlib1g-dev \
-    wget
+    wget \
+    libffi-dev
 ENV REMOVE_DEPS build-essential \
     wget
 
