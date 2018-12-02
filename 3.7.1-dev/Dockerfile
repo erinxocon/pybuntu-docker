@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 ENV PATH /usr/local/bin:$PATH
-ENV PYTHON_VERSION 2.7.15
+ENV PYTHON_VERSION 3.7.1
 ENV PYTHON_PIP_VERSION 18.1
 ENV BUILD_DEPS build-essential \
     libncursesw5-dev \
@@ -16,6 +16,7 @@ ENV BUILD_DEPS build-essential \
     ca-certificates \
     zlib1g-dev \
     wget \
+    curl \
     libffi-dev
 ENV REMOVE_DEPS build-essential \
     wget
@@ -36,8 +37,11 @@ RUN apt update && apt install --no-install-recommends --no-install-suggests -y $
     \) -exec rm -rf '{}' + \
     && rm -rf /Python-${PYTHON_VERSION} \
     \
-    && python --version \
+    && python3 --version \
     \
+    && cd /usr/local/bin \
+	&& ln -s pydoc3 pydoc \
+	&& ln -s python3 python \
     && cd \
     \
     set -ex; \
@@ -57,8 +61,6 @@ RUN apt update && apt install --no-install-recommends --no-install-suggests -y $
                 -o \
                 \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
             \) -exec rm -rf '{}' +; \
-    rm -f get-pip.py \
-    && apt remove --autoremove --purge -y ${REMOVE_DEPS} \
-    && rm -rf /var/lib/apt/lists/*
+    rm -f get-pip.py
 
 CMD ["python"]

@@ -16,6 +16,7 @@ ENV BUILD_DEPS build-essential \
     ca-certificates \
     zlib1g-dev \
     wget \
+    curl \
     libffi-dev
 ENV REMOVE_DEPS build-essential \
     wget
@@ -57,8 +58,6 @@ RUN apt update && apt install --no-install-recommends --no-install-suggests -y $
                 -o \
                 \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
             \) -exec rm -rf '{}' +; \
-    rm -f get-pip.py \
-    && apt remove --autoremove --purge -y ${REMOVE_DEPS} \
-    && rm -rf /var/lib/apt/lists/*
+    rm -f get-pip.py
 
 CMD ["python"]
