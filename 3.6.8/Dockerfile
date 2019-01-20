@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 ENV PATH /usr/local/bin:$PATH
-ENV PYTHON_VERSION 3.7.1
+ENV PYTHON_VERSION 3.6.8
 ENV PYTHON_PIP_VERSION 18.1
 ENV BUILD_DEPS build-essential \
     libncursesw5-dev \
