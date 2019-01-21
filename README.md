@@ -1,7 +1,7 @@
 # Pybuntu - Ubutnut 18.04 + Python 🌈🍰🌈!
 
 ## What is it?
-Pybuntu is basically just ubuntu but with specific versions of python compiled and ready for use!  The official python images offer alpine and debian variants; I wanted to provide an ubuntu variant, especially since ubuntu core for docker is rather small now.  The images wiht `-dev` have build tools installed for cases when you need to build dependecies from pip.  This makes the resulting image bigger, hence why it's seperate.
+Pybuntu is basically just ubuntu but with specific versions of python compiled and ready for use!  The official python images offer alpine and debian variants; I wanted to provide an ubuntu variant, especially since ubuntu core for docker is rather small now.  The images with `-dev` have build tools installed for cases when you need to build dependecies from pip.  This makes the resulting image bigger, hence why it's seperate.
 
 # Supported tags and respective Dockerfile links
 * [`3`, `3.7`, `3.7.2`, `latest` (_python 3.7.2_)](https://github.com/erinxocon/pybuntu-docker/blob/master/3.7.2/Dockerfile)
