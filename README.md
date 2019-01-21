@@ -1,4 +1,4 @@
-# Pybuntu - Ubutnut 18.04 + Python 🌈🍰🌈!
+# Pybuntu - Ubuntu 18.04 + Python 🌈🍰🌈!
 
 ## What is it?
 Pybuntu is basically just ubuntu but with specific versions of python compiled and ready for use!  The official python images offer alpine and debian variants; I wanted to provide an ubuntu variant, especially since ubuntu core for docker is rather small now.  The images with `-dev` have build tools installed for cases when you need to build dependecies from pip.  This makes the resulting image bigger, hence why it's seperate.
