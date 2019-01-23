@@ -47,7 +47,7 @@ RUN apt update && apt install --no-install-recommends --no-install-suggests -y $
         \
         python get-pip.py \
             --disable-pip-version-check \
-            --no-cache-dir \
+            --cache-dir=/pipcache \
             "pip==$PYTHON_PIP_VERSION" \
         ; \
         pip --version; \
@@ -58,6 +58,7 @@ RUN apt update && apt install --no-install-recommends --no-install-suggests -y $
                 -o \
                 \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
             \) -exec rm -rf '{}' +; \
-    rm -f get-pip.py
+    rm -f get-pip.py \
+    && rm -rf /pipcache
 
 CMD ["python"]
