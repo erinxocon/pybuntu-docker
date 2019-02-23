@@ -5,7 +5,7 @@ ENV LANG C.UTF-8
 ENV PATH /usr/local/bin:$PATH
 ENV PYTHON_VERSION 3.8.0
 ENV ALPHA_VERSION a1
-ENV PYTHON_PIP_VERSION 19.0.2
+ENV PYTHON_PIP_VERSION 19.0.3
 ENV BUILD_DEPS build-essential \
     libncursesw5-dev \
     libreadline-gplv2-dev \
