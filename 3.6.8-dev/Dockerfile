@@ -4,7 +4,7 @@ ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 ENV PATH /usr/local/bin:$PATH
 ENV PYTHON_VERSION 3.6.8
-ENV PYTHON_PIP_VERSION 19.0.3
+ENV PYTHON_PIP_VERSION 19.1.1
 ENV BUILD_DEPS build-essential \
     libncursesw5-dev \
     libreadline-gplv2-dev \
@@ -25,42 +25,42 @@ RUN apt update && apt install --no-install-recommends --no-install-suggests -y $
     && wget -O- https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz | tar xz \
     && cd Python-${PYTHON_VERSION}/ \
     && ./configure \
-        --without-ensurepip \
-        --enable-loadable-sqlite-extensions \
+    --without-ensurepip \
+    --enable-loadable-sqlite-extensions \
     && make -j "$(nproc)" \
     && make install \
     && find /usr/local -depth \
     \( \
-        \( -type d -a \( -name test -o -name tests \) \) \
-        -o \
-        \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
+    \( -type d -a \( -name test -o -name tests \) \) \
+    -o \
+    \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
     \) -exec rm -rf '{}' + \
     && rm -rf /Python-${PYTHON_VERSION} \
     \
     && python3 --version \
     \
     && cd /usr/local/bin \
-	&& ln -s pydoc3 pydoc \
-	&& ln -s python3 python \
+    && ln -s pydoc3 pydoc \
+    && ln -s python3 python \
     && cd \
     \
     set -ex; \
-        \
-        wget -O get-pip.py 'https://bootstrap.pypa.io/get-pip.py'; \
-        \
-        python get-pip.py \
-            --disable-pip-version-check \
-            --cache-dir=/pipcache \
-            "pip==$PYTHON_PIP_VERSION" \
-        ; \
-        pip --version; \
-        \
-        find /usr/local -depth \
-            \( \
-                \( -type d -a \( -name test -o -name tests \) \) \
-                -o \
-                \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
-            \) -exec rm -rf '{}' +; \
+    \
+    wget -O get-pip.py 'https://bootstrap.pypa.io/get-pip.py'; \
+    \
+    python get-pip.py \
+    --disable-pip-version-check \
+    --cache-dir=/pipcache \
+    "pip==$PYTHON_PIP_VERSION" \
+    ; \
+    pip --version; \
+    \
+    find /usr/local -depth \
+    \( \
+    \( -type d -a \( -name test -o -name tests \) \) \
+    -o \
+    \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
+    \) -exec rm -rf '{}' +; \
     rm -f get-pip.py \
     && rm -rf /pipcache
 
