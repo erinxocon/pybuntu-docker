@@ -4,8 +4,8 @@ ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 ENV PATH /usr/local/bin:$PATH
 ENV PYTHON_VERSION 3.8.0
-ENV ALPHA_VERSION a4
-ENV PYTHON_PIP_VERSION 19.1.1
+ENV BETA_VERSION b4
+ENV PYTHON_PIP_VERSION 19.2.3
 ENV BUILD_DEPS build-essential \
     libncursesw5-dev \
     libreadline-gplv2-dev \
@@ -23,8 +23,8 @@ ENV REMOVE_DEPS build-essential \
     wget
 
 RUN apt update && apt install --no-install-recommends --no-install-suggests -y ${BUILD_DEPS} \
-    && wget -O- https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}${ALPHA_VERSION}.tgz | tar xz \
-    && cd Python-${PYTHON_VERSION}${ALPHA_VERSION}/ \
+    && wget -O- https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}${BETA_VERSION}.tgz | tar xz \
+    && cd Python-${PYTHON_VERSION}${BETA_VERSION}/ \
     && ./configure \
     --without-ensurepip \
     --enable-loadable-sqlite-extensions \
@@ -36,7 +36,7 @@ RUN apt update && apt install --no-install-recommends --no-install-suggests -y $
     -o \
     \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
     \) -exec rm -rf '{}' + \
-    && rm -rf /Python-${PYTHON_VERSION}${ALPHA_VERSION} \
+    && rm -rf /Python-${PYTHON_VERSION}${BETA_VERSION} \
     \
     && python3 --version \
     \

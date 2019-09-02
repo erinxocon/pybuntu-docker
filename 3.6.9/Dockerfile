@@ -3,8 +3,8 @@ FROM ubuntu:18.04
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 ENV PATH /usr/local/bin:$PATH
-ENV PYTHON_VERSION 3.7.3
-ENV PYTHON_PIP_VERSION 19.1.1
+ENV PYTHON_VERSION 3.6.9
+ENV PYTHON_PIP_VERSION 19.2.3
 ENV BUILD_DEPS build-essential \
     libncursesw5-dev \
     libreadline-gplv2-dev \
@@ -16,7 +16,6 @@ ENV BUILD_DEPS build-essential \
     ca-certificates \
     zlib1g-dev \
     wget \
-    curl \
     libffi-dev
 ENV REMOVE_DEPS build-essential \
     wget
@@ -62,6 +61,8 @@ RUN apt update && apt install --no-install-recommends --no-install-suggests -y $
     \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
     \) -exec rm -rf '{}' +; \
     rm -f get-pip.py \
-    && rm -rf /pipcache
+    && rm -rf /pipcache \
+    && apt remove --autoremove --purge -y ${REMOVE_DEPS} \
+    && rm -rf /var/lib/apt/lists/*
 
 CMD ["python"]
