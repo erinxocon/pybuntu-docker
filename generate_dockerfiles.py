@@ -28,6 +28,7 @@ python_versions = [
 for image, tags in images.items():
     for tag in tags:
         for version in python_versions:
+            # Iterate through ALL of the things
             dfile = 'Dockerfile.python3' if version.startswith('3') else 'Dockerfile.python2'
             with open(TEMPLATES_DIR / dfile, encoding='utf-8') as f:
                 dockerfile = f.read()
