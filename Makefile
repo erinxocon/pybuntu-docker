@@ -76,4 +76,20 @@ push:
 	@docker push jetblackpope/pybuntu:2.7.16-disco
 
 	@docker tag jetblackpope/pybuntu:3.7.4-bionic jetblackpope/pybuntu:latest
+	@docker push jetblackpope/pybuntu:latest
+	@docker tag jetblackpope/pybuntu:3.7.4-bionic jetblackpope/pybuntu:3.7
+	@docker push jetblackpope/pybuntu:3.7
 	@docker tag jetblackpope/pybuntu:3.7.4-bionic jetblackpope/pybuntu:3
+	@docker push jetblackpope/pybuntu:3
+
+	@docker tag jetblackpope/pybuntu:3.6.9-bionic jetblackpope/pybuntu:3.6
+	@docker push jetblackpope/pybuntu:3.6
+
+	@docker tag jetblackpope/pybuntu:3.5.7-bionic jetblackpope/pybuntu:3.5
+	@docker push jetblackpope/pybuntu:3.5
+
+	@docker tag jetblackpope/pybuntu:2.7.16-bionic jetblackpope/pybuntu:2
+	@docker push jetblackpope/pybuntu:2
+
+	@docker tag jetblackpope/pybuntu:2.7.16-bionic jetblackpope/pybuntu:2.7
+	@docker push jetblackpope/pybuntu:2.7
