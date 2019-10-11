@@ -113,12 +113,6 @@ RUN set -ex \
     \
     && python2 --version
 
-RUN cd /usr/local/bin \
-	&& ln -s idle2 idle \
-	&& ln -s pydoc2 pydoc \
-	&& ln -s python2 python \
-	&& ln -s python2-config python-config
-
 RUN set -ex; \
     \
     savedAptMark="$(apt-mark showmanual)"; \
