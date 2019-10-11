@@ -1,3 +1,5 @@
+# THIS FILE IS GENERATED AND UPDATED BY generate_dockerfiles.py
+
 FROM {image}:{tag}
 
 ENV LC_ALL C.UTF-8
