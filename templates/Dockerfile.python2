@@ -3,8 +3,9 @@ FROM {image}:{tag}
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 ENV PATH /usr/local/bin:$PATH
-ENV PYTHON_VERSION 3.7.4
-ENV PYTHON_PIP_VERSION 19.2.3
+ENV PYTHON_VERSION {python_version}
+ENV PYTHON_PIP_VERSION {pip_version}
+ENV PYTHON_GET_PIP_URL https://github.com/pypa/get-pip/raw/309a56c5fd94bd1134053a541cb4657a4e47e09d/get-pip.py
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates \
@@ -32,8 +33,8 @@ RUN set -ex \
         wget \
         xz-utils \
         zlib1g-dev \
-    && wget -O python.tar.xz "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" \
-    && wget -O python.tar.xz.asc "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc" \
+    && wget -O python.tar.xz "https://www.python.org/ftp/python/${{PYTHON_VERSION%%[a-z]*}}/Python-$PYTHON_VERSION.tar.xz" \
+    && wget -O python.tar.xz.asc "https://www.python.org/ftp/python/${{PYTHON_VERSION%%[a-z]*}}/Python-$PYTHON_VERSION.tar.xz.asc" \
     && mkdir -p /usr/src/python \
     && tar -xJC /usr/src/python --strip-components=1 -f python.tar.xz \
     && rm python.tar.xz \
@@ -90,8 +91,8 @@ RUN set -ex \
     \
     && apt-mark auto '.*' > /dev/null \
     && apt-mark manual $savedAptMark \
-    && find /usr/local -type f -executable -not \( -name '*tkinter*' \) -exec ldd '{}' ';' \
-        | awk '/=>/ { print $(NF-1) }' \
+    && find /usr/local -type f -executable -not \( -name '*tkinter*' \) -exec ldd '{{}}' ';' \
+        | awk '/=>/ {{ print $(NF-1) }}' \
         | sort -u \
         | xargs -r dpkg-query --search \
         | cut -d: -f1 \
@@ -105,9 +106,45 @@ RUN set -ex \
             \( -type d -a \( -name test -o -name tests \) \) \
             -o \
             \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
-        \) -exec rm -rf '{}' + \
+        \) -exec rm -rf '{{}}' + \
     && rm -rf /usr/src/python \
     \
-    && python3 --version
+    && python2 --version
 
-CMD ["python3"]
+RUN cd /usr/local/bin \
+	&& ln -s idle2 idle \
+	&& ln -s pydoc2 pydoc \
+	&& ln -s python2 python \
+	&& ln -s python2-config python-config
+
+RUN set -ex; \
+    \
+    savedAptMark="$(apt-mark showmanual)"; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends wget; \
+    \
+    wget -O get-pip.py "$PYTHON_GET_PIP_URL"; \
+    \
+    apt-mark auto '.*' > /dev/null; \
+    [ -z "$savedAptMark" ] || apt-mark manual $savedAptMark; \
+    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+    rm -rf /var/lib/apt/lists/*; \
+    \
+    python get-pip.py \
+        --disable-pip-version-check \
+        --no-cache-dir \
+        "pip==$PYTHON_PIP_VERSION" \
+    ; \
+    pip --version; \
+    \
+    find /usr/local -depth \
+        \( \
+            \( -type d -a \( -name test -o -name tests \) \) \
+            -o \
+            \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
+        \) -exec rm -rf '{{}}' +; \
+    rm -f get-pip.py
+
+{install_build_essentials}
+
+CMD ["python"]
