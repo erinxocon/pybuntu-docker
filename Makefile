@@ -21,6 +21,9 @@ help:
 	@echo 'Upload:'
 	@echo '	push			Push all docker images up to dockerhub.'
 
+clean:
+	rm -rf 2.7.16 2.7.17rc1 3.5.7 3.5.8rc1 3.6.9 3.7.4 3.7.5rc1 3.8.0rc1
+
 generate:
 	@python generate_dockerfiles.py
 	@echo 'All Dockerfiles Generated!'
@@ -71,3 +74,6 @@ push:
 	@docker push jetblackpope/pybuntu:3.5.7-disco
 	@docker push jetblackpope/pybuntu:2.7.17rc1-disco
 	@docker push jetblackpope/pybuntu:2.7.16-disco
+
+	@docker tag jetblackpope/pybuntu:3.7.4-bionic jetblackpope/pybuntu:latest
+	@docker tag jetblackpope/pybuntu:3.7.4-bionic jetblackpope/pybuntu:3
