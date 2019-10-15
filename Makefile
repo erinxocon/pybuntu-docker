@@ -22,7 +22,7 @@ help:
 	@echo '	push				Push all docker images up to dockerhub.'
 
 clean:
-	rm -rf 2.7.16 2.7.17rc1 3.5.7 3.5.8rc1 3.6.9 3.7.4 3.7.5rc1 3.8.0rc1
+	rm -rf out
 
 generate:
 	@python generate_dockerfiles.py
