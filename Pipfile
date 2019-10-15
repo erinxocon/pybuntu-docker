@@ -7,6 +7,9 @@ verify_ssl = true
 ipython = "*"
 
 [packages]
+jinja2 = "*"
+docker-py = "*"
+invoke = "*"
 
 [requires]
 python_version = "3.7"
