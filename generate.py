@@ -1,11 +1,8 @@
-import os
 from pathlib import Path
 
 from jinja2 import Template
 
-ROOT = Path(__file__).parent
-TEMPLATES_DIR = ROOT / 'templates'
-OUT = ROOT / 'out'
+from constants import OUT, TEMPLATES_DIR, UBUNTU_VERSIONS, VERSIONS
 
 INSTALL_BUILD_ESSENTIALS = r'''
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -79,31 +76,17 @@ PIP_VERSION = '19.2.3'
 
 PIP_URL = 'https://github.com/pypa/get-pip/raw/309a56c5fd94bd1134053a541cb4657a4e47e09d/get-pip.py'
 
-UBUNTU_VERSIONS = {'18.04': 'bionic', '19.04': 'disco'}
-
-PYTHON_VERSIONS = {
-    '2.7.16',
-    '3.5.7',
-    '3.6.9',
-    '3.7.4',
-    '3.8.0',
-    '2.7.17rc1',
-    '3.7.5rc1',
-    '3.5.8rc1',
-}
-
-versions = ((u_ver, p_ver) for u_ver in UBUNTU_VERSIONS for p_ver in PYTHON_VERSIONS)
 
 with (TEMPLATES_DIR / 'Dockerfile-caveman.j2').open(mode='r', encoding='utf-8') as f:
-    python2_template = Template(f.read())
+    PYTHON2_TEMPLATE = Template(f.read())
 
 with (TEMPLATES_DIR / 'Dockerfile.j2').open(mode='r', encoding='utf-8') as f:
-    python3_template = Template(f.read())
+    PYTHON3_TEMPLATE = Template(f.read())
 
 
 def generate_dockerfiles():
 
-    for u_ver, p_ver in versions:
+    for u_ver, p_ver in VERSIONS:
         context_args = {
             'tag': u_ver,
             'python_version': p_ver,
@@ -114,7 +97,7 @@ def generate_dockerfiles():
             'install_build_essential': '',
         }
 
-        t = python3_template if p_ver.startswith('3') else python2_template
+        t = PYTHON3_TEMPLATE if p_ver.startswith('3') else PYTHON2_TEMPLATE
 
         dest = OUT / p_ver / UBUNTU_VERSIONS[u_ver]
         dest.mkdir(exist_ok=True, parents=True)

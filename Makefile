@@ -25,22 +25,22 @@ clean:
 	rm -rf out
 
 generate:
-	@python generate_dockerfiles.py
+	@python generate.py
 	@echo 'All Dockerfiles Generated!'
 
 build_disco_%: 
 	@echo 'Building $* on Ubuntu 19.04'
-	@ docker build --rm -f "$*/Dockerfile.1904" -t pybuntu:$*-19.04 -t jetblackpope/pybuntu:$*-disco $*
+	@docker build --rm -f "out/$*/disco/Dockerfile" -t pybuntu:$*-19.04 -t jetblackpope/pybuntu:$*-disco out/$*/disco
 
 build_dev_%:
 	@echo 'Building $* dev image on Ubuntu 18.04'
-	@docker build --rm -f "$*/Dockerfile.1804.dev" -t pybuntu:$*-18.04-dev -t jetblackpope/pybuntu:$*-bionic-dev $*
+	@docker build --rm -f "out/$*/Dockerfile.1804.dev" -t pybuntu:$*-18.04-dev -t jetblackpope/pybuntu:$*-bionic-dev $*
 
 build_bionic_%:
 	@echo 'Building $* on Ubuntu 18.04'
-	@docker build --rm -f "$*/Dockerfile.1804" -t pybuntu:$*-18.04 -t jetblackpope/pybuntu:$*-bionic $*
+	docker build --rm -f "out/$*/bionic/Dockerfile" -t pybuntu:$*-18.04 -t jetblackpope/pybuntu:$*-bionic $*
 
-build_disco: build_disco_2.7.16 build_disco_2.7.17rc1 build_disco_3.5.7 build_disco_3.5.8rc1 build_disco_3.6.9 build_disco_3.7.4 build_disco_3.7.5rc1 build_disco_3.8.0rc1
+build_disco: build_disco_2.7.16 build_disco_2.7.17rc1 build_disco_3.5.7 build_disco_3.5.8rc1 build_disco_3.6.9 build_disco_3.7.4 build_disco_3.7.5rc1 build_disco_3.8.0
 	@echo 'All disco based images built!'
 
 build_dev: build_dev_2.7.16 build_dev_3.5.7  build_dev_3.6.9 build_dev_3.7.4
@@ -52,7 +52,18 @@ build_bionic: build_bionic_2.7.16 build_bionic_2.7.17rc1 build_bionic_3.5.7 buil
 build: build_bionic build_dev build_disco
 	@echo 'All images built!'
 
-push:
+push_disco:
+	@echo 'Pushing disco images'
+	@docker push jetblackpope/pybuntu:3.8.0-disco
+	@docker push jetblackpope/pybuntu:3.7.5rc1-disco
+	@docker push jetblackpope/pybuntu:3.7.4-disco
+	@docker push jetblackpope/pybuntu:3.6.9-disco
+	@docker push jetblackpope/pybuntu:3.5.8rc1-disco
+	@docker push jetblackpope/pybuntu:3.5.7-disco
+	@docker push jetblackpope/pybuntu:2.7.17rc1-disco
+	@docker push jetblackpope/pybuntu:2.7.16-disco
+
+push: push_disco
 	@echo 'Pushing images up to dockerhub'
 	@docker push jetblackpope/pybuntu:3.8.0rc1-bionic
 	@docker push jetblackpope/pybuntu:3.7.5rc1-bionic
@@ -66,14 +77,7 @@ push:
 	@docker push jetblackpope/pybuntu:3.6.9-bionic-dev
 	@docker push jetblackpope/pybuntu:3.5.7-bionic-dev
 	@docker push jetblackpope/pybuntu:2.7.16-bionic-dev
-	@docker push jetblackpope/pybuntu:3.8.0rc1-disco
-	@docker push jetblackpope/pybuntu:3.7.5rc1-disco
-	@docker push jetblackpope/pybuntu:3.7.4-disco
-	@docker push jetblackpope/pybuntu:3.6.9-disco
-	@docker push jetblackpope/pybuntu:3.5.8rc1-disco
-	@docker push jetblackpope/pybuntu:3.5.7-disco
-	@docker push jetblackpope/pybuntu:2.7.17rc1-disco
-	@docker push jetblackpope/pybuntu:2.7.16-disco
+
 
 	@docker tag jetblackpope/pybuntu:3.7.4-bionic jetblackpope/pybuntu:latest
 	@docker push jetblackpope/pybuntu:latest
