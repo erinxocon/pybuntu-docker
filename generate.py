@@ -4,7 +4,7 @@ from constants import OUT, TEMPLATES_DIR, UBUNTU_VERSIONS, VERSIONS
 
 INSTALL_BUILD_ESSENTIALS = r'''
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        build-essentials \
+        build-essential \
     && rm -rf /var/lib/apt/lists/*
 '''
 
@@ -103,7 +103,7 @@ def generate_dockerfiles():
         with (dest / 'Dockerfile').open(mode='w', encoding='utf-8') as f:
             f.write(t.render(**context_args))
 
-        if u_ver == '18.04':
+        if u_ver == '18.04' and not any(x in p_ver for x in ('rc', 'b', 'a')):
             dev_dest = dest / 'dev'
             dev_dest.mkdir(exist_ok=True)
             with (dev_dest / 'Dockerfile').open(mode='w', encoding='utf-8') as f:
