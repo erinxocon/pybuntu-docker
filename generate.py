@@ -1,12 +1,10 @@
-from pathlib import Path
-
 from jinja2 import Template
 
 from constants import OUT, TEMPLATES_DIR, UBUNTU_VERSIONS, VERSIONS
 
 INSTALL_BUILD_ESSENTIALS = r'''
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        build-essentials
+        build-essentials \
     && rm -rf /var/lib/apt/lists/*
 '''
 
@@ -104,6 +102,13 @@ def generate_dockerfiles():
 
         with (dest / 'Dockerfile').open(mode='w', encoding='utf-8') as f:
             f.write(t.render(**context_args))
+
+        if u_ver == '18.04':
+            dev_dest = dest / 'dev'
+            dev_dest.mkdir(exist_ok=True)
+            with (dev_dest / 'Dockerfile').open(mode='w', encoding='utf-8') as f:
+                context_args['install_build_essential'] = INSTALL_BUILD_ESSENTIALS
+                f.write(t.render(**context_args))
 
 
 if __name__ == '__main__':
