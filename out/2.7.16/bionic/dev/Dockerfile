@@ -111,5 +111,9 @@ RUN set -ex; \
     rm -f get-pip.py
 
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essentials \
+    && rm -rf /var/lib/apt/lists/*
+
 
 CMD ["python2"]
