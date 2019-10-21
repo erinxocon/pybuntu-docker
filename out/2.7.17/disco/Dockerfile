@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         netbase \
     && rm -rf /var/lib/apt/lists/*
 
-ENV PYTHON_VERSION 2.7.17rc1
+ENV PYTHON_VERSION 2.7.17
 
 RUN set -ex \
     \
