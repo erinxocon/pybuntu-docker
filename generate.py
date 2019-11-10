@@ -70,7 +70,7 @@ PROFILE_TASKS = [
     'test_unicode',
 ]
 
-PIP_VERSION = '19.3'
+PIP_VERSION = '19.3.1'
 
 PIP_URL = 'https://github.com/pypa/get-pip/raw/309a56c5fd94bd1134053a541cb4657a4e47e09d/get-pip.py'
 
