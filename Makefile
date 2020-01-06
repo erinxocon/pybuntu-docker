@@ -88,7 +88,7 @@ push_disco:
 
 push_bionic:
 	@echo 'Pushing bionic images'
-	@docker push jetblackpope/pybuntu:3.8.01-bionic
+	@docker push jetblackpope/pybuntu:3.8.1-bionic
 	@docker push jetblackpope/pybuntu:3.7.6-bionic
 	@docker push jetblackpope/pybuntu:3.6.10-bionic
 	@docker push jetblackpope/pybuntu:3.5.9-bionic
