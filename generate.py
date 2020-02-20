@@ -103,12 +103,12 @@ def generate_dockerfiles():
         with (dest / 'Dockerfile').open(mode='w', encoding='utf-8') as f:
             f.write(t.render(**context_args))
 
-        if u_ver == '18.04' and not any(x in p_ver for x in ('rc', 'b', 'a')):
-            dev_dest = dest / 'dev'
-            dev_dest.mkdir(exist_ok=True)
-            with (dev_dest / 'Dockerfile').open(mode='w', encoding='utf-8') as f:
-                context_args['install_build_essential'] = INSTALL_BUILD_ESSENTIALS
-                f.write(t.render(**context_args))
+        # if u_ver == '18.04' and not any(x in p_ver for x in ('rc', 'b', 'a')):
+        #     dev_dest = dest / 'dev'
+        #     dev_dest.mkdir(exist_ok=True)
+        #     with (dev_dest / 'Dockerfile').open(mode='w', encoding='utf-8') as f:
+        #         context_args['install_build_essential'] = INSTALL_BUILD_ESSENTIALS
+        #         f.write(t.render(**context_args))
 
 
 if __name__ == '__main__':
