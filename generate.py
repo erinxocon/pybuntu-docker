@@ -1,6 +1,6 @@
 from jinja2 import Template
 
-from constants import OUT, TEMPLATES_DIR, UBUNTU_VERSIONS, VERSIONS
+from constants import OUT, TEMPLATES_DIR, UBUNTU_VERSIONS, VERSIONS, PIP_VERSION
 
 INSTALL_BUILD_ESSENTIALS = r'''
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -70,7 +70,6 @@ PROFILE_TASKS = [
     'test_unicode',
 ]
 
-PIP_VERSION = '20.0.2'
 
 PIP_URL = 'https://github.com/pypa/get-pip/raw/309a56c5fd94bd1134053a541cb4657a4e47e09d/get-pip.py'
 

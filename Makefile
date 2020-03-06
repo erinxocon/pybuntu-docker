@@ -35,10 +35,10 @@ build_bionic_%:
 	@echo 'Building $* on Ubuntu 18.04'
 	docker build --rm -f "out/$*/bionic/Dockerfile" -t pybuntu:$*-18.04 -t jetblackpope/pybuntu:$*-bionic out/$*/bionic
 
-build_disco: build_disco_2.7.17 build_disco_3.5.9 build_disco_3.6.10 build_disco_3.7.6 build_disco_3.8.1 build_disco_3.9.0a3 build_disco_3.8.2rc2
+build_disco: build_disco_2.7.17 build_disco_3.5.9 build_disco_3.6.10 build_disco_3.7.6 build_disco_3.8.2 build_disco_3.9.0a4 build_disco_3.7.7rc1
 	@echo 'All disco based images built!'
 
-build_bionic: build_bionic_2.7.17 build_bionic_3.5.9 build_bionic_3.6.10 build_bionic_3.7.6 build_bionic_3.8.1 build_bionic_3.9.0a3 build_bionic_3.8.2rc2
+build_bionic: build_bionic_2.7.17 build_bionic_3.5.9 build_bionic_3.6.10 build_bionic_3.7.6 build_bionic_3.8.2 build_bionic_3.9.0a4 build_bionic_3.7.7rc1
 	@echo 'All bionic images built'
 
 build: build_bionic build_disco
@@ -46,23 +46,23 @@ build: build_bionic build_disco
 
 push_disco:
 	@echo 'Pushing disco images'
-	@docker push jetblackpope/pybuntu:3.8.1-disco
+	@docker push jetblackpope/pybuntu:3.8.2-disco
 	@docker push jetblackpope/pybuntu:3.7.6-disco
 	@docker push jetblackpope/pybuntu:3.6.10-disco
 	@docker push jetblackpope/pybuntu:3.5.9-disco
 	@docker push jetblackpope/pybuntu:2.7.17-disco
 
-	@docker push jetblackpope/pybuntu:3.9.0a3-disco
-	@docker push jetblackpope/pybuntu:3.8.2rc2-disco
+	@docker push jetblackpope/pybuntu:3.9.0a4-disco
+	@docker push jetblackpope/pybuntu:3.7.7rc1-disco
 
 
-	@docker tag jetblackpope/pybuntu:3.8.1-disco jetblackpope/pybuntu:3-disco
+	@docker tag jetblackpope/pybuntu:3.8.2-disco jetblackpope/pybuntu:3-disco
 	@docker push jetblackpope/pybuntu:3-disco
 
-	@docker tag jetblackpope/pybuntu:3.9.0a3-disco jetblackpope/pybuntu:3.9-disco
+	@docker tag jetblackpope/pybuntu:3.9.0a4-disco jetblackpope/pybuntu:3.9-disco
 	@docker push jetblackpope/pybuntu:3.9-disco
 
-	@docker tag jetblackpope/pybuntu:3.8.1-disco jetblackpope/pybuntu:3.8-disco
+	@docker tag jetblackpope/pybuntu:3.8.2-disco jetblackpope/pybuntu:3.8-disco
 	@docker push jetblackpope/pybuntu:3.8-disco
 
 	@docker tag jetblackpope/pybuntu:3.7.6-disco jetblackpope/pybuntu:3.7-disco
@@ -82,28 +82,28 @@ push_disco:
 
 push_bionic:
 	@echo 'Pushing bionic images'
-	@docker push jetblackpope/pybuntu:3.8.1-bionic
+	@docker push jetblackpope/pybuntu:3.8.2-bionic
 	@docker push jetblackpope/pybuntu:3.7.6-bionic
 	@docker push jetblackpope/pybuntu:3.6.10-bionic
 	@docker push jetblackpope/pybuntu:3.5.9-bionic
 	@docker push jetblackpope/pybuntu:2.7.17-bionic
 
-	@docker push jetblackpope/pybuntu:3.9.0a3-bionic
-	@docker push jetblackpope/pybuntu:3.8.2rc2-bionic
+	@docker push jetblackpope/pybuntu:3.9.0a4-bionic
+	@docker push jetblackpope/pybuntu:3.7.7rc1-bionic
 
-	@docker tag jetblackpope/pybuntu:3.8.1-bionic jetblackpope/pybuntu:3-bionic
+	@docker tag jetblackpope/pybuntu:3.8.2-bionic jetblackpope/pybuntu:3-bionic
 	@docker push jetblackpope/pybuntu:3-bionic
 
-	@docker tag jetblackpope/pybuntu:3.8.1-bionic jetblackpope/pybuntu:3
+	@docker tag jetblackpope/pybuntu:3.8.2-bionic jetblackpope/pybuntu:3
 	@docker push jetblackpope/pybuntu:3
 
-	@docker tag jetblackpope/pybuntu:3.8.1-bionic jetblackpope/pybuntu:latest
+	@docker tag jetblackpope/pybuntu:3.8.2-bionic jetblackpope/pybuntu:latest
 	@docker push jetblackpope/pybuntu:latest
 
-	@docker tag jetblackpope/pybuntu:3.9.0a3-disco jetblackpope/pybuntu:3.9-disco
+	@docker tag jetblackpope/pybuntu:3.9.0a4-disco jetblackpope/pybuntu:3.9-disco
 	@docker push jetblackpope/pybuntu:3.9-disco
 
-	@docker tag jetblackpope/pybuntu:3.8.1-bionic jetblackpope/pybuntu:3.8-bionic
+	@docker tag jetblackpope/pybuntu:3.8.2-bionic jetblackpope/pybuntu:3.8-bionic
 	@docker push jetblackpope/pybuntu:3.8-bionic
 
 	@docker tag jetblackpope/pybuntu:3.7.6-bionic jetblackpope/pybuntu:3.7-bionic
