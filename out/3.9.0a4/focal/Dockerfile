@@ -1,4 +1,4 @@
-FROM ubuntu:19.04
+FROM ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -8,8 +8,6 @@ ENV PATH /usr/local/bin:$PATH
 # http://bugs.python.org/issue19846
 # > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
 ENV LANG C.UTF-8
-# https://github.com/docker-library/python/issues/147
-ENV PYTHONIOENCODING UTF-8
 
 # runtime dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -17,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         netbase \
     && rm -rf /var/lib/apt/lists/*
 
-ENV PYTHON_VERSION 2.7.17
+ENV PYTHON_VERSION 3.9.0a4
 
 RUN set -ex \
     \
@@ -27,17 +25,20 @@ RUN set -ex \
         gcc \
         libbz2-dev \
         libc6-dev \
-        libdb-dev \
         libgdbm-dev \
         libncursesw5-dev \
         libreadline-dev \
         libsqlite3-dev \
         libssl-dev \
         make \
-        tk-dev \
         wget \
         xz-utils \
         zlib1g-dev \
+        libexpat1-dev \
+        libffi-dev \
+        liblzma-dev \
+        tk-dev \
+        uuid-dev \
     \
     && wget -O python.tar.xz "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" \
     && mkdir -p /usr/src/python \
@@ -48,9 +49,49 @@ RUN set -ex \
     && gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" \
     && ./configure \
         --build="$gnuArch" \
+        --enable-loadable-sqlite-extensions \
+        --enable-optimizations \
         --enable-shared \
-        --enable-unicode=ucs4 \
+        --with-system-expat \
+        --with-system-ffi \
+        --without-ensurepip \
     && make -j "$(nproc)" \
+# setting PROFILE_TASK makes "--enable-optimizations" reasonable: https://bugs.python.org/issue36044 / https://github.com/docker-library/python/issues/160#issuecomment-509426916
+        PROFILE_TASK='-m test.regrtest --pgo \
+            test_array \
+            test_base64 \
+            test_binascii \
+            test_binhex \
+            test_binop \
+            test_bytes \
+            test_c_locale_coercion \
+            test_class \
+            test_cmath \
+            test_codecs \
+            test_compile \
+            test_complex \
+            test_csv \
+            test_decimal \
+            test_dict \
+            test_float \
+            test_fstring \
+            test_hashlib \
+            test_io \
+            test_iter \
+            test_json \
+            test_long \
+            test_math \
+            test_memoryview \
+            test_pickle \
+            test_re \
+            test_set \
+            test_slice \
+            test_struct \
+            test_threading \
+            test_time \
+            test_traceback \
+            test_unicode \
+        ' \
     && make install \
     && ldconfig \
     \
@@ -74,7 +115,14 @@ RUN set -ex \
         \) -exec rm -rf '{}' + \
     && rm -rf /usr/src/python \
     \
-    && python2 --version
+    && python3 --version
+
+# make some useful symlinks that are expected to exist
+RUN cd /usr/local/bin \
+    && ln -s idle3 idle \
+    && ln -s pydoc3 pydoc \
+    && ln -s python3 python \
+    && ln -s python3-config python-config
 
 # if this is called "PIP_VERSION", pip explodes with "ValueError: invalid truth value '<VERSION>'"
 ENV PYTHON_PIP_VERSION 20.0.2
@@ -111,4 +159,4 @@ RUN set -ex; \
 
 
 
-CMD ["python2"]
+CMD ["python3"]
