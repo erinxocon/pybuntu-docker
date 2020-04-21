@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         netbase \
     && rm -rf /var/lib/apt/lists/*
 
-ENV PYTHON_VERSION 2.7.18rc1
+ENV PYTHON_VERSION 2.7.18
 
 RUN set -ex \
     \
