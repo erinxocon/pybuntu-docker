@@ -94,6 +94,9 @@ push_bionic:
 	@docker tag jetblackpope/pybuntu:3.8.2-bionic jetblackpope/pybuntu:3
 	@docker push jetblackpope/pybuntu:3
 
+	@docker tag jetblackpope/pybuntu:3.8.2-bionic jetblackpope/pybuntu:3.8
+	@docker push jetblackpope/pybuntu:3.8
+
 	@docker tag jetblackpope/pybuntu:3.8.2-bionic jetblackpope/pybuntu:latest
 	@docker push jetblackpope/pybuntu:latest
 
@@ -117,6 +120,12 @@ push_bionic:
 
 	@docker tag jetblackpope/pybuntu:2.7.18-bionic jetblackpope/pybuntu:2.7-bionic
 	@docker push jetblackpope/pybuntu:2.7-bionic
+
+	@docker tag jetblackpope/pybuntu:2.7.18-bionic jetblackpope/pybuntu:2.7
+	@docker push jetblackpope/pybuntu:2.7
+
+	@docker tag jetblackpope/pybuntu:2.7.18-bionic jetblackpope/pybuntu:2
+	@docker push jetblackpope/pybuntu:2
 
 push: push_focal push_bionic
 	@echo 'Pushing images up to dockerhub'
