@@ -10,4 +10,4 @@ PYTHON_VERSIONS = {'3.5.9', '3.6.11', '3.7.8', '3.8.5', '3.9.0b5'}
 
 VERSIONS = ((u_ver, p_ver) for u_ver in UBUNTU_VERSIONS for p_ver in PYTHON_VERSIONS)
 
-PIP_VERSION = '20.1.1'
+PIP_VERSION = '20.2.1'
