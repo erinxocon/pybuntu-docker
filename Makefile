@@ -35,10 +35,10 @@ build_bionic_%:
 	@echo 'Building $* on Ubuntu 18.04'
 	docker build --rm -f "out/$*/bionic/Dockerfile" -t pybuntu:$*-18.04 -t jetblackpope/pybuntu:$*-bionic out/$*/bionic
 
-build_focal: build_focal_3.5.10 build_focal_3.6.12 build_focal_3.7.9 build_focal_3.8.6 build_focal_3.9.0
+build_focal: build_focal_3.5.10 build_focal_3.6.12 build_focal_3.7.9 build_focal_3.8.6 build_focal_3.9.0 build_focal_3.10.0a1
 	@echo 'All focal based images built!'
 
-build_bionic: build_bionic_3.5.10 build_bionic_3.6.12 build_bionic_3.7.9 build_bionic_3.8.6 build_bionic_3.9.0
+build_bionic: build_bionic_3.5.10 build_bionic_3.6.12 build_bionic_3.7.9 build_bionic_3.8.6 build_bionic_3.9.0 build_bionic_3.10.0a1
 	@echo 'All bionic images built'
 
 build: build_bionic build_focal
@@ -46,6 +46,7 @@ build: build_bionic build_focal
 
 push_focal:
 	@echo 'Pushing focal images'
+	@docker push jetblackpope/pybuntu:3.10.0a1-focal
 	@docker push jetblackpope/pybuntu:3.9.0-focal
 	@docker push jetblackpope/pybuntu:3.8.6-focal
 	@docker push jetblackpope/pybuntu:3.7.9-focal
@@ -54,6 +55,9 @@ push_focal:
 
 	@docker tag jetblackpope/pybuntu:3.9.0-focal jetblackpope/pybuntu:3-focal
 	@docker push jetblackpope/pybuntu:3-focal
+
+	@docker tag jetblackpope/pybuntu:3.10.0a1-focal jetblackpope/pybuntu:3.10-focal
+	@docker push jetblackpope/pybuntu:3.10-focal
 
 	@docker tag jetblackpope/pybuntu:3.9.0-focal jetblackpope/pybuntu:3.9-focal
 	@docker push jetblackpope/pybuntu:3.9-focal
@@ -72,6 +76,7 @@ push_focal:
 
 push_bionic:
 	@echo 'Pushing bionic images'
+	@docker push jetblackpope/pybuntu:3.10.0a1-bionic
 	@docker push jetblackpope/pybuntu:3.9.0-bionic
 	@docker push jetblackpope/pybuntu:3.8.6-bionic
 	@docker push jetblackpope/pybuntu:3.7.9-bionic
@@ -83,6 +88,9 @@ push_bionic:
 
 	@docker tag jetblackpope/pybuntu:3.9.0-bionic jetblackpope/pybuntu:3
 	@docker push jetblackpope/pybuntu:3
+
+	@docker tag jetblackpope/pybuntu:3.10.0a1-focal jetblackpope/pybuntu:3.10-focal
+	@docker push jetblackpope/pybuntu:3.10-focal
 
 	@docker tag jetblackpope/pybuntu:3.9.0-focal jetblackpope/pybuntu:3.9-focal
 	@docker push jetblackpope/pybuntu:3.9-focal
