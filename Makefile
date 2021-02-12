@@ -35,10 +35,10 @@ build_bionic_%:
 	@echo 'Building $* on Ubuntu 18.04'
 	docker build --rm -f "out/$*/bionic/Dockerfile" -t pybuntu:$*-18.04 -t jetblackpope/pybuntu:$*-bionic out/$*/bionic
 
-build_focal: build_focal_3.5.10 build_focal_3.6.12 build_focal_3.7.9 build_focal_3.8.7 build_focal_3.9.1 build_focal_3.10.0a5
+build_focal: build_focal_3.6.12 build_focal_3.7.9 build_focal_3.8.7 build_focal_3.9.1 build_focal_3.10.0a5
 	@echo 'All focal based images built!'
 
-build_bionic: build_bionic_3.5.10 build_bionic_3.6.12 build_bionic_3.7.9 build_bionic_3.8.7 build_bionic_3.9.1 build_bionic_3.10.0a5
+build_bionic: build_bionic_3.6.12 build_bionic_3.7.9 build_bionic_3.8.7 build_bionic_3.9.1 build_bionic_3.10.0a5
 	@echo 'All bionic images built'
 
 build: build_bionic build_focal
@@ -51,7 +51,6 @@ push_focal:
 	@docker push jetblackpope/pybuntu:3.8.7-focal
 	@docker push jetblackpope/pybuntu:3.7.9-focal
 	@docker push jetblackpope/pybuntu:3.6.12-focal
-	@docker push jetblackpope/pybuntu:3.5.10-focal
 
 	@docker tag jetblackpope/pybuntu:3.9.1-focal jetblackpope/pybuntu:3-focal
 	@docker push jetblackpope/pybuntu:3-focal
@@ -71,9 +70,6 @@ push_focal:
 	@docker tag jetblackpope/pybuntu:3.6.12-focal jetblackpope/pybuntu:3.6-focal
 	@docker push jetblackpope/pybuntu:3.6-focal
 
-	@docker tag jetblackpope/pybuntu:3.5.10-focal jetblackpope/pybuntu:3.5-focal
-	@docker push jetblackpope/pybuntu:3.5-focal
-
 push_bionic:
 	@echo 'Pushing bionic images'
 	@docker push jetblackpope/pybuntu:3.10.0a5-bionic
@@ -81,7 +77,6 @@ push_bionic:
 	@docker push jetblackpope/pybuntu:3.8.7-bionic
 	@docker push jetblackpope/pybuntu:3.7.9-bionic
 	@docker push jetblackpope/pybuntu:3.6.12-bionic
-	@docker push jetblackpope/pybuntu:3.5.10-bionic
 
 	@docker tag jetblackpope/pybuntu:3.9.1-bionic jetblackpope/pybuntu:latest
 	@docker push jetblackpope/pybuntu:latest
@@ -103,9 +98,6 @@ push_bionic:
 
 	@docker tag jetblackpope/pybuntu:3.6.12-bionic jetblackpope/pybuntu:3.6-bionic
 	@docker push jetblackpope/pybuntu:3.6-bionic
-
-	@docker tag jetblackpope/pybuntu:3.5.10-bionic jetblackpope/pybuntu:3.5-bionic
-	@docker push jetblackpope/pybuntu:3.5-bionic
 
 push: push_focal push_bionic
 	@echo 'Pushing images up to dockerhub'
