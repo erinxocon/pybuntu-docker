@@ -35,10 +35,10 @@ build_bionic_%:
 	@echo 'Building $* on Ubuntu 18.04'
 	docker build --rm -f "out/$*/bionic/Dockerfile" -t pybuntu:$*-18.04 -t jetblackpope/pybuntu:$*-bionic out/$*/bionic
 
-build_focal: build_focal_3.6.12 build_focal_3.7.9 build_focal_3.8.7 build_focal_3.9.1 build_focal_3.10.0a5
+build_focal: build_focal_3.6.13 build_focal_3.7.10 build_focal_3.8.8 build_focal_3.9.2 build_focal_3.10.0a6
 	@echo 'All focal based images built!'
 
-build_bionic: build_bionic_3.6.12 build_bionic_3.7.9 build_bionic_3.8.7 build_bionic_3.9.1 build_bionic_3.10.0a5
+build_bionic: build_bionic_3.6.13 build_bionic_3.7.10 build_bionic_3.8.8 build_bionic_3.9.2 build_bionic_3.10.0a6
 	@echo 'All bionic images built'
 
 build: build_bionic build_focal
@@ -46,57 +46,57 @@ build: build_bionic build_focal
 
 push_focal:
 	@echo 'Pushing focal images'
-	@docker push jetblackpope/pybuntu:3.10.0a5-focal
-	@docker push jetblackpope/pybuntu:3.9.1-focal
-	@docker push jetblackpope/pybuntu:3.8.7-focal
-	@docker push jetblackpope/pybuntu:3.7.9-focal
-	@docker push jetblackpope/pybuntu:3.6.12-focal
+	@docker push jetblackpope/pybuntu:3.10.0a6-focal
+	@docker push jetblackpope/pybuntu:3.9.2-focal
+	@docker push jetblackpope/pybuntu:3.8.8-focal
+	@docker push jetblackpope/pybuntu:3.7.10-focal
+	@docker push jetblackpope/pybuntu:3.6.13-focal
 
-	@docker tag jetblackpope/pybuntu:3.9.1-focal jetblackpope/pybuntu:3-focal
+	@docker tag jetblackpope/pybuntu:3.9.2-focal jetblackpope/pybuntu:3-focal
 	@docker push jetblackpope/pybuntu:3-focal
 
-	@docker tag jetblackpope/pybuntu:3.10.0a5-focal jetblackpope/pybuntu:3.10-focal
+	@docker tag jetblackpope/pybuntu:3.10.0a6-focal jetblackpope/pybuntu:3.10-focal
 	@docker push jetblackpope/pybuntu:3.10-focal
 
-	@docker tag jetblackpope/pybuntu:3.9.1-focal jetblackpope/pybuntu:3.9-focal
+	@docker tag jetblackpope/pybuntu:3.9.2-focal jetblackpope/pybuntu:3.9-focal
 	@docker push jetblackpope/pybuntu:3.9-focal
 
-	@docker tag jetblackpope/pybuntu:3.8.7-focal jetblackpope/pybuntu:3.8-focal
+	@docker tag jetblackpope/pybuntu:3.8.8-focal jetblackpope/pybuntu:3.8-focal
 	@docker push jetblackpope/pybuntu:3.8-focal
 
-	@docker tag jetblackpope/pybuntu:3.7.9-focal jetblackpope/pybuntu:3.7-focal
+	@docker tag jetblackpope/pybuntu:3.7.10-focal jetblackpope/pybuntu:3.7-focal
 	@docker push jetblackpope/pybuntu:3.7-focal
 
-	@docker tag jetblackpope/pybuntu:3.6.12-focal jetblackpope/pybuntu:3.6-focal
+	@docker tag jetblackpope/pybuntu:3.6.13-focal jetblackpope/pybuntu:3.6-focal
 	@docker push jetblackpope/pybuntu:3.6-focal
 
 push_bionic:
 	@echo 'Pushing bionic images'
-	@docker push jetblackpope/pybuntu:3.10.0a5-bionic
-	@docker push jetblackpope/pybuntu:3.9.1-bionic
-	@docker push jetblackpope/pybuntu:3.8.7-bionic
-	@docker push jetblackpope/pybuntu:3.7.9-bionic
-	@docker push jetblackpope/pybuntu:3.6.12-bionic
+	@docker push jetblackpope/pybuntu:3.10.0a6-bionic
+	@docker push jetblackpope/pybuntu:3.9.2-bionic
+	@docker push jetblackpope/pybuntu:3.8.8-bionic
+	@docker push jetblackpope/pybuntu:3.7.10-bionic
+	@docker push jetblackpope/pybuntu:3.6.13-bionic
 
-	@docker tag jetblackpope/pybuntu:3.9.1-bionic jetblackpope/pybuntu:latest
+	@docker tag jetblackpope/pybuntu:3.9.2-bionic jetblackpope/pybuntu:latest
 	@docker push jetblackpope/pybuntu:latest
 
-	@docker tag jetblackpope/pybuntu:3.9.1-bionic jetblackpope/pybuntu:3
+	@docker tag jetblackpope/pybuntu:3.9.2-bionic jetblackpope/pybuntu:3
 	@docker push jetblackpope/pybuntu:3
 
-	@docker tag jetblackpope/pybuntu:3.10.0a5-focal jetblackpope/pybuntu:3.10-focal
+	@docker tag jetblackpope/pybuntu:3.10.0a6-focal jetblackpope/pybuntu:3.10-focal
 	@docker push jetblackpope/pybuntu:3.10-focal
 
-	@docker tag jetblackpope/pybuntu:3.9.1-focal jetblackpope/pybuntu:3.9-focal
+	@docker tag jetblackpope/pybuntu:3.9.2-focal jetblackpope/pybuntu:3.9-focal
 	@docker push jetblackpope/pybuntu:3.9-focal
 
-	@docker tag jetblackpope/pybuntu:3.8.7-bionic jetblackpope/pybuntu:3.8-bionic
+	@docker tag jetblackpope/pybuntu:3.8.8-bionic jetblackpope/pybuntu:3.8-bionic
 	@docker push jetblackpope/pybuntu:3.8-bionic
 
-	@docker tag jetblackpope/pybuntu:3.7.9-bionic jetblackpope/pybuntu:3.7-bionic
+	@docker tag jetblackpope/pybuntu:3.7.10-bionic jetblackpope/pybuntu:3.7-bionic
 	@docker push jetblackpope/pybuntu:3.7-bionic
 
-	@docker tag jetblackpope/pybuntu:3.6.12-bionic jetblackpope/pybuntu:3.6-bionic
+	@docker tag jetblackpope/pybuntu:3.6.13-bionic jetblackpope/pybuntu:3.6-bionic
 	@docker push jetblackpope/pybuntu:3.6-bionic
 
 push: push_focal push_bionic
