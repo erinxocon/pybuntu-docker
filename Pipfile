@@ -8,7 +8,6 @@ ipython = "*"
 
 [packages]
 jinja2 = "*"
-docker-py = "*"
 invoke = "*"
 
 [requires]
