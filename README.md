@@ -1,4 +1,4 @@
-# Pybuntu - Ubuntu 18.04 + Python 🌈🍰🌈!
+# Pybuntu - Ubuntu 18.04/20.04 + Python 🌈🍰🌈!
 
 ## What is it?
 
