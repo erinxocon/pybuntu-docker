@@ -1,16 +1,19 @@
 # Pybuntu - Ubuntu 18.04 + Python 🌈🍰🌈!
 
 ## What is it?
-Pybuntu is basically just ubuntu but with specific versions of python compiled and ready for use!  The official python images offer alpine and debian variants; I wanted to provide an ubuntu variant, especially since ubuntu core for docker is rather small now.  The images with `-dev` have build tools installed for cases when you need to build dependencies from pip.  This makes the resulting image bigger, hence why it's separate.
+
+Pybuntu is basically just ubuntu but with specific versions of python compiled and ready for use! The official python images offer alpine and debian variants; I wanted to provide an ubuntu variant, especially since ubuntu core for docker is rather small now. Now with arm64 support!
 
 # Supported tags and respective Dockerfile links
-* [`3.8`, `3.8.0` (_python 3.8.0b4_)](https://github.com/erinxocon/pybuntu-docker/blob/master/3.8.0/Dockerfile)
-* [`3`, `3.7`, `3.7.4`, `latest` (_python 3.7.4_)](https://github.com/erinxocon/pybuntu-docker/blob/master/3.7.4/Dockerfile)
-* [`3.6`, `3.6.9` (_python 3.6.9_)](https://github.com/erinxocon/pybuntu-docker/blob/master/3.6.9/Dockerfile)
-* [`3.5`, `3.5.7` (_python 3.5.7_)](https://github.com/erinxocon/pybuntu-docker/blob/master/3.5.7/Dockerfile)
-* [`2`, `2.7`, `2.7.16` (_python 2.7.16_)](https://github.com/erinxocon/pybuntu-docker/blob/master/2.7.16/Dockerfile)
-* [`3.8.0-dev` (_python 3.8.0b4_)](https://github.com/erinxocon/pybuntu-docker/blob/master/3.8.0-dev/Dockerfile)
-* [`3.7.4-dev` (_python 3.7.4_)](https://github.com/erinxocon/pybuntu-docker/blob/master/3.7.4-dev/Dockerfile)
-* [`3.6.9-dev` (_python 3.6.9_)](https://github.com/erinxocon/pybuntu-docker/blob/master/3.6.9-dev/Dockerfile)
-* [`3.5.7-dev` (_python 3.5.7_)](https://github.com/erinxocon/pybuntu-docker/blob/master/3.5.7-dev/Dockerfile)
-* [`2.7.16-dev` (_python 2.7.16](https://github.com/erinxocon/pybuntu-docker/blob/master/2.7.16-dev/Dockerfile)
+
+-   [`3.10-focal`, `3.10.0rc1-focal` (_python 3.10.0_)](https://github.com/erinxocon/pybuntu-docker/blob/main/out/3.10.0rc1/focal/Dockerfile)
+-   [`latest`, `3.9-focal`, `3.9.6-focal` (_python 3.9.6_)](https://github.com/erinxocon/pybuntu-docker/blob/out/main/3.9.6/focal/Dockerfile)
+-   [`3.8-focal`, `3.8.11-focal` (_python 3.8.11_)](https://github.com/erinxocon/pybuntu-docker/blob/main/out/3.8.11/focal/Dockerfile)
+-   [`3.7-focal`, `3.7.11-focal`, (_python 3.7.11_)](https://github.com/erinxocon/pybuntu-docker/blob/main/out/3.7.11/focal/Dockerfile)
+-   [`3.6-focal`, `3.6.14-focal` (_python 3.6.14_)](https://github.com/erinxocon/pybuntu-docker/blob/main/out/3.6.14/focal/Dockerfile)
+
+-   [`3.10-bionic`, `3.10.0rc1-bionic` (_python 3.10.0_)](https://github.com/erinxocon/pybuntu-docker/blob/main/out/3.10.0rc1/bionic/Dockerfile)
+-   [`3.9-bionic`, `3.9.6-bionic` (_python 3.9.6_)](https://github.com/erinxocon/pybuntu-docker/blob/main/out/3.9.6/bionic/Dockerfile)
+-   [`3.8-bionic`, `3.8.11-bionic` (_python 3.8.11_)](https://github.com/erinxocon/pybuntu-docker/blob/main/out/3.8.11/bionic/Dockerfile)
+-   [`3.7-bionic`, `3.7.11-bionic`, (_python 3.7.11_)](https://github.com/erinxocon/pybuntu-docker/blob/main/out/3.7.11/bionic/Dockerfile)
+-   [`3.6-bionic`, `3.6.14-bionic` (_python 3.6.14_)](https://github.com/erinxocon/pybuntu-docker/blob/main/out/3.6.14/bionic/Dockerfile)
