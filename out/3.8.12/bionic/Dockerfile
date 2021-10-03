@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         netbase \
     && rm -rf /var/lib/apt/lists/*
 
-ENV PYTHON_VERSION 3.7.11
+ENV PYTHON_VERSION 3.8.12
 
 RUN set -ex \
     \
