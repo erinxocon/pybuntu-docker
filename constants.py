@@ -6,7 +6,7 @@ OUT = ROOT / "out"
 
 UBUNTU_VERSIONS = {"18.04": "bionic", "20.04": "focal"}
 
-PYTHON_VERSIONS = {"3.6.15", "3.7.12", "3.8.12", "3.9.7", "3.10.0"}
+PYTHON_VERSIONS = {"3.6.15", "3.7.12", "3.8.12", "3.9.8", "3.10.0"}
 
 VERSIONS = ((u_ver, p_ver) for u_ver in UBUNTU_VERSIONS for p_ver in PYTHON_VERSIONS)
 
