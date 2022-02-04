@@ -38,10 +38,10 @@ build_bionic_%:
 	@echo 'Building $* on Ubuntu 18.04'
 	docker build --rm -f "out/$*/bionic/Dockerfile" -t pybuntu:$*-18.04-$(ARCH) -t jetblackpope/pybuntu:$*-bionic-$(ARCH) out/$*/bionic
 
-build_focal: build_focal_3.6.15 build_focal_3.7.12 build_focal_3.8.12 build_focal_3.9.9 build_focal_3.10.1
+build_focal: build_focal_3.7.12 build_focal_3.8.12 build_focal_3.9.10 build_focal_3.10.2 build_focal_3.11.0a5
 	@echo 'All focal based images built!'
 
-build_bionic: build_bionic_3.6.15 build_bionic_3.7.12 build_bionic_3.8.12 build_bionic_3.9.9 build_bionic_3.10.1
+build_bionic: build_bionic_3.7.12 build_bionic_3.8.12 build_bionic_3.9.10 build_bionic_3.10.2 build_bionic_3.11.0a5
 	@echo 'All bionic images built'
 
 build: build_bionic build_focal
@@ -51,19 +51,19 @@ build: build_bionic build_focal
 
 push_focal:
 	@echo 'Pushing focal images'
-	@docker push jetblackpope/pybuntu:3.10.1-focal-$(ARCH)
-	@docker push jetblackpope/pybuntu:3.9.9-focal-$(ARCH)
+	@docker push jetblackpope/pybuntu:3.11.0a5-focal-$(ARCH)
+	@docker push jetblackpope/pybuntu:3.10.2-focal-$(ARCH)
+	@docker push jetblackpope/pybuntu:3.9.10-focal-$(ARCH)
 	@docker push jetblackpope/pybuntu:3.8.12-focal-$(ARCH)
 	@docker push jetblackpope/pybuntu:3.7.12-focal-$(ARCH)
-	@docker push jetblackpope/pybuntu:3.6.15-focal-$(ARCH)
 
 push_bionic:
 	@echo 'Pushing bionic images'
-	@docker push jetblackpope/pybuntu:3.10.1-bionic-$(ARCH)
-	@docker push jetblackpope/pybuntu:3.9.9-bionic-$(ARCH)
+	@docker push jetblackpope/pybuntu:3.11.0a5-bionic-$(ARCH)
+	@docker push jetblackpope/pybuntu:3.10.2-bionic-$(ARCH)
+	@docker push jetblackpope/pybuntu:3.9.10-bionic-$(ARCH)
 	@docker push jetblackpope/pybuntu:3.8.12-bionic-$(ARCH)
 	@docker push jetblackpope/pybuntu:3.7.12-bionic-$(ARCH)
-	@docker push jetblackpope/pybuntu:3.6.15-bionic-$(ARCH)
 
 push: push_focal push_bionic
 	@echo 'Pushing images up to dockerhub'
@@ -74,14 +74,14 @@ manifest_bionic_%:
 	@echo 'Creating multi arch manifest for $*'
 	@docker manifest create jetblackpope/pybuntu:$*-bionic --amend jetblackpope/pybuntu:$*-bionic-arm64 --amend jetblackpope/pybuntu:$*-bionic-x86_64
 
-manifest_bionic: manifest_bionic_3.6.15 manifest_bionic_3.7.12 manifest_bionic_3.8.12 manifest_bionic_3.9.9 manifest_bionic_3.10.1
+manifest_bionic: manifest_bionic_3.7.12 manifest_bionic_3.8.12 manifest_bionic_3.9.10 manifest_bionic_3.10.2 manifest_bionic_3.11.0a5
 	@echo 'Creating multi arch image for bionic'
 
 manifest_focal_%:
 	@echo 'Creating multi arch manifest for $*'
 	@docker manifest create jetblackpope/pybuntu:$*-focal --amend jetblackpope/pybuntu:$*-focal-arm64 --amend jetblackpope/pybuntu:$*-focal-x86_64
 
-manifest_focal: manifest_focal_3.6.15 manifest_focal_3.7.12 manifest_focal_3.8.12 manifest_focal_3.9.9 manifest_focal_3.10.1
+manifest_focal: manifest_focal_3.7.12 manifest_focal_3.8.12 manifest_focal_3.9.10 manifest_focal_3.10.2 manifest_focal_3.11.0a5
 	@echo 'Creating multi arch manifest for focal'
 
 manifest: manifest_focal manifest_bionic
@@ -91,25 +91,25 @@ push_manifest_bionic_%:
 	@echo 'Pushing multi-arch image'
 	@docker manifest push jetblackpope/pybuntu:$*-bionic
 
-push_manifest_bionic: push_manifest_bionic_3.6.15 push_manifest_bionic_3.7.12 push_manifest_bionic_3.8.12 push_manifest_bionic_3.9.9 push_manifest_bionic_3.10.1
+push_manifest_bionic: push_manifest_bionic_3.7.12 push_manifest_bionic_3.8.12 push_manifest_bionic_3.9.10 push_manifest_bionic_3.10.2 push_manifest_bionic_3.11.0a5
 	@echo 'Pushing all multi-arch bionic images'
 
 push_manifest_focal_%:
 	@echo 'Pushing multi-arch image'
 	@docker manifest push jetblackpope/pybuntu:$*-focal
 
-push_manifest_focal: push_manifest_focal_3.6.15 push_manifest_focal_3.7.12 push_manifest_focal_3.8.12 push_manifest_focal_3.9.9 push_manifest_focal_3.10.1
+push_manifest_focal: push_manifest_focal_3.7.12 push_manifest_focal_3.8.12 push_manifest_focal_3.9.10 push_manifest_focal_3.10.2 push_manifest_focal_3.11.0a5
 	@echo 'Pushing all multi-arch focal images'
 
 push_manifest: push_manifest_bionic push_manifest_focal
 	@echo 'Pushing all manifest files to dockerhub'
 
-	@docker manifest create jetblackpope/pybuntu:latest --amend jetblackpope/pybuntu:3.9.9-focal-arm64 --amend jetblackpope/pybuntu:3.10.1-focal-x86_64
+	@docker manifest create jetblackpope/pybuntu:latest --amend jetblackpope/pybuntu:3.10.2-focal-arm64 --amend jetblackpope/pybuntu:3.10.2-focal-x86_64
 
-	@docker manifest create jetblackpope/pybuntu:3.10-focal --amend jetblackpope/pybuntu:3.10.1-focal-arm64 --amend jetblackpope/pybuntu:3.10.1-focal-x86_64
+	@docker manifest create jetblackpope/pybuntu:3.10-focal --amend jetblackpope/pybuntu:3.10.2-focal-arm64 --amend jetblackpope/pybuntu:3.10.2-focal-x86_64
 	@docker manifest push jetblackpope/pybuntu:3.10-focal
 
-	@docker manifest create jetblackpope/pybuntu:3.9-focal --amend jetblackpope/pybuntu:3.9.9-focal-arm64 --amend jetblackpope/pybuntu:3.9.9-focal-x86_64
+	@docker manifest create jetblackpope/pybuntu:3.9-focal --amend jetblackpope/pybuntu:3.9.10-focal-arm64 --amend jetblackpope/pybuntu:3.9.10-focal-x86_64
 	@docker manifest push jetblackpope/pybuntu:3.9-focal
 
 	@docker manifest create jetblackpope/pybuntu:3.8-focal --amend jetblackpope/pybuntu:3.8.12-focal-arm64 --amend jetblackpope/pybuntu:3.8.12-focal-x86_64
@@ -121,10 +121,10 @@ push_manifest: push_manifest_bionic push_manifest_focal
 	@docker manifest create jetblackpope/pybuntu:3.6-focal --amend jetblackpope/pybuntu:3.6.15-focal-arm64 --amend jetblackpope/pybuntu:3.6.15-focal-x86_64
 	@docker manifest push jetblackpope/pybuntu:3.6-focal
 
-	@docker manifest create jetblackpope/pybuntu:3.10-bionic --amend jetblackpope/pybuntu:3.10.1-bionic-arm64 --amend jetblackpope/pybuntu:3.10.1-bionic-x86_64
+	@docker manifest create jetblackpope/pybuntu:3.10-bionic --amend jetblackpope/pybuntu:3.10.2-bionic-arm64 --amend jetblackpope/pybuntu:3.10.2-bionic-x86_64
 	@docker manifest push jetblackpope/pybuntu:3.10-bionic
 
-	@docker manifest create jetblackpope/pybuntu:3.9-bionic --amend jetblackpope/pybuntu:3.9.9-bionic-arm64 --amend jetblackpope/pybuntu:3.9.9-bionic-x86_64
+	@docker manifest create jetblackpope/pybuntu:3.9-bionic --amend jetblackpope/pybuntu:3.9.10-bionic-arm64 --amend jetblackpope/pybuntu:3.9.10-bionic-x86_64
 	@docker manifest push jetblackpope/pybuntu:3.9-bionic
 
 	@docker manifest create jetblackpope/pybuntu:3.8-bionic --amend jetblackpope/pybuntu:3.8.12-bionic-arm64 --amend jetblackpope/pybuntu:3.8.12-bionic-x86_64
