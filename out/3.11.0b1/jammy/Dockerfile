@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         netbase \
     && rm -rf /var/lib/apt/lists/*
 
-ENV PYTHON_VERSION 3.8.13
+ENV PYTHON_VERSION 3.11.0b1
 
 RUN set -ex \
     \
